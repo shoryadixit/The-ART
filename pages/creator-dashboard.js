@@ -23,6 +23,7 @@ export default function CreatorDashboard(){
         const connection = await web3Modal.connect();
         const provider = new ethers.providers.Web3Provider(connection);
         const signer = provider.getSigner();
+        console.log(provider.getCode(signer._address));
 
         const marketContract = new ethers.Contract(nftMarketAddress, NFTMarket.abi, signer);
         const tokenContract = new ethers.Contract(nftAddress, NFT.abi, signer);

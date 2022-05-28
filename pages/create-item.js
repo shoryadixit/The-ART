@@ -9,7 +9,7 @@ const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
 import { nftAddress, nftMarketAddress } from '../config';
 
 import NFT from '../artifacts/contracts/NFT.sol/NFT.json'
-import Market from '../artifacts/contracts/NFTMarket.sol/NFTMarket.json';
+import NFTMarket from '../artifacts/contracts/NFTMarket.sol/NFTMarket.json';
 
 export default function CreateItem() {
     const [fileUrl, setFileUrl] = useState(null);
@@ -60,8 +60,8 @@ export default function CreateItem() {
         let tx = await transaction.wait();
 
         let event = tx.events[0];
-        let value = event.arg[2];
-        let tokenId = valid.toNumber();
+        let value = event.args[2];
+        let tokenId = value.toNumber();
 
         const price = ethers.utils.parseUnits(formInput.price, 'ether');
         contract = new ethers.Contract(nftMarketAddress, NFTMarket.abi, signer);
